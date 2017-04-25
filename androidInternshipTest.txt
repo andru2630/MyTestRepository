@@ -1,0 +1,73 @@
+Problem no.1
+I)	In case of using the syntax "String str1 = new String("Hello");" two objects will be created. One object 
+will be a string literal and will be placed in String constant pool and the other object will be created and 
+placed in the normal memory. The second one will act like a normal object in the Heap.
+
+	In case of using the syntax "String str2 = "Hello";" the string literal "Hello" will be created and 
+placed in the String constant pool. Thus one object is created with str1 as reference variable to it. 
+Whenever a new reference variable will be created (such as str2) whit the same value as "Hello", it would be 
+a reference to the already existing String literal present in the constant pool (the one which str2 is reffering
+to) instead of creating a new one.
+
+	Those being said it is better to use the String literal (second choice of syntax) to reduce the memory usage.
+
+II)	String objects are immutable which means its value cannot be changed. If we try to alter their initial 
+value, a new object gets created. Those bieng said, if we use the first snippet of code, we will create a new object
+for each iteration of the for loop, which means we will allocate memory for every iteration.
+	StringBuffer objects are mutable. This means we can change their initial value without creating a new object
+everytime we modify them. In the given code snippet we create only one object and use the append method to add elements 
+but we still have a single object which means less memory used.
+	To conclude, we choose the second option because it gives us the possibility to change the state of the object
+and because is more efficient.
+
+
+Problem no.2
+
+
+public class SimpleApplication {
+	public static void main(String[] args) {
+
+		String[] s1 = { "roweb", "android", "internship", "2017" };
+		String[] s2 = { "roweb", "Android", "internship" };
+
+		String[] s3 = { "android", "is", "awesome" };
+		String[] s4 = { "android", "is", "awesome" };
+
+		System.out.println(equals(s1, s2));
+		System.out.println(equals(s3, s4));
+	}
+
+	// I've made the method static so it won't require a new class and an
+	// instance of that class.
+
+	public static boolean equals(String[] a1, String[] a2) {
+		if (a1 == a2)
+			return true;
+		if (a1 == null || a2 == null)
+			return false;
+
+		// Compares the length of the arrays to see if they have the same number
+		// of elements.
+
+		int length = a1.length;
+		if (a2.length != length)
+			return false;
+
+		// If they do have the same number of elements, we proceed to compare
+		// each element on the same position of every array.
+
+		for (int i = 0; i < length; i++) {
+			String b1 = a1[i];
+			String b2 = a2[i];
+			if (!(b1 == null ? b2 == null : b1.equals(b2)))
+				return false;
+		}
+
+		// If the arrays contain the same elements in the same order, they are
+		// equal. Also, two elements of the array are considered equal if they
+		// are both null.
+
+		return true;
+	}
+
+}
